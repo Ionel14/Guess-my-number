@@ -156,9 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         controller: _controller,
                         enabled: _textEnabled,
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                         onChanged: (String value) {
                           _numberTried = int.tryParse(value);
                         },
@@ -175,26 +173,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                 if (_buttonText == 'Restart') {
                                   _startGame();
                                 } else {
-                                  _textHint =
-                                      'You tried $_numberTried\nYou guessed right';
+                                  _textHint = 'You tried $_numberTried\nYou guessed right';
                                   _buttonText = 'Restart';
                                   _controller.clear();
                                   _textEnabled = false;
                                   _showAlertDialog(context);
                                 }
                               } else if (_numberTried! > _numberToGuess) {
-                                _textHint =
-                                    'You tried $_numberTried\nTry lower';
+                                _textHint = 'You tried $_numberTried\nTry lower';
                               } else {
-                                _textHint =
-                                    'You tried $_numberTried\nTry higher';
+                                _textHint = 'You tried $_numberTried\nTry higher';
                               }
                             }
                           });
                         },
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.grey)),
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.grey)),
                         child: Text(_buttonText))
                   ],
                 ))
