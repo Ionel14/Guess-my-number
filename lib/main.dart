@@ -45,52 +45,50 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _showAlertDialog(BuildContext context) {
-    final AlertDialog alert = AlertDialog(
-      title: const Text(
-        'You guessed right',
-        style: TextStyle(
-          fontSize: 25,
-        ),
-      ),
-      content: Text(
-        'It was $_numberTried',
-        style: const TextStyle(
-          fontSize: 25,
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: const Text(
-            'Try again!',
-            style: TextStyle(
-              fontSize: 25,
-            ),
-          ),
-          onPressed: () {
-            setState(() {
-              _startGame();
-            });
-            Navigator.of(context).pop(); // Close the alert dialog
-          },
-        ),
-        TextButton(
-          child: const Text(
-            'OK',
-            style: TextStyle(
-              fontSize: 25,
-            ),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop(); // Close the alert dialog
-          },
-        ),
-      ],
-    );
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return AlertDialog(
+          title: const Text(
+            'You guessed right',
+            style: TextStyle(
+              fontSize: 25,
+            ),
+          ),
+          content: Text(
+            'It was $_numberTried',
+            style: const TextStyle(
+              fontSize: 25,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Try again!',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  _startGame();
+                });
+                Navigator.of(context).pop(); // Close the alert dialog
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'OK',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the alert dialog
+              },
+            ),
+          ],
+        );
       },
     );
   }
@@ -158,7 +156,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         controller: _controller,
                         enabled: _textEnabled,
                         keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         onChanged: (String value) {
                           _numberTried = int.tryParse(value);
                         },
@@ -175,21 +175,26 @@ class _MyHomePageState extends State<MyHomePage> {
                                 if (_buttonText == 'Restart') {
                                   _startGame();
                                 } else {
-                                  _textHint = 'You tried $_numberTried\nYou guessed right';
+                                  _textHint =
+                                      'You tried $_numberTried\nYou guessed right';
                                   _buttonText = 'Restart';
                                   _controller.clear();
                                   _textEnabled = false;
                                   _showAlertDialog(context);
                                 }
                               } else if (_numberTried! > _numberToGuess) {
-                                _textHint = 'You tried $_numberTried\nTry lower';
+                                _textHint =
+                                    'You tried $_numberTried\nTry lower';
                               } else {
-                                _textHint = 'You tried $_numberTried\nTry higher';
+                                _textHint =
+                                    'You tried $_numberTried\nTry higher';
                               }
                             }
                           });
                         },
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.grey)),
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.grey)),
                         child: Text(_buttonText))
                   ],
                 ))
